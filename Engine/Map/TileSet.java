@@ -1,8 +1,8 @@
-package com.com.pong.Engine.Map;
+package Engine.Map;
 
 import java.awt.image.BufferedImage;
 
-import com.com.pong.Engine.Gfx.Sprite;
+import Engine.Gfx.Sprite;
 
 public class TileSet {
 

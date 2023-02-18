@@ -1,4 +1,4 @@
-package com.com.pong.Engine.Utils;
+package Engine.Utils;
 
 import java.awt.Color;
 import java.awt.event.ComponentEvent;
@@ -6,16 +6,16 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.JFrame;
 
-import com.com.pong.Engine.Components.Camera;
-import com.com.pong.Engine.Input.KeyboardReader;
-import com.com.pong.Engine.Input.MouseReader;
-import com.com.pong.Engine.Utils.Geom.Vec2;
+import Engine.Components.Camera;
+import Engine.Input.KeyboardReader;
+import Engine.Input.MouseReader;
+import Engine.Utils.Geom.Vec2;
 
-public class Window extends JFrame implements ComponentListener{
+public class Window extends JFrame implements ComponentListener {
 
-    public static String RelativeResourcePath = System.getProperty("user.dir") + "/src/main/java/Assets/"; 
-    
-    //Static data
+    public static String RelativeResourcePath = System.getProperty("user.dir") + "/src/main/java/Assets/";
+
+    // Static data
     public static int width, height;
     public static String name;
 
@@ -26,7 +26,7 @@ public class Window extends JFrame implements ComponentListener{
     public static boolean focus = true;
     private static Window window;
 
-    //Local class data
+    // Local class data
     Renderer gameRenderer = new Renderer();
     KeyboardReader reader = new KeyboardReader();
     MouseReader mouseReader = new MouseReader();
@@ -34,14 +34,14 @@ public class Window extends JFrame implements ComponentListener{
     /**
      * Create a window in where game objects can be placed
      */
-    public void initWindow(int width, int height, String name){
+    public void initWindow(int width, int height, String name) {
 
-        if(Window.WindowExists)
+        if (Window.WindowExists)
             return;
-        
+
         Window.WindowExists = true;
 
-        //Define basic properties of the window
+        // Define basic properties of the window
         Window.width = width;
         Window.height = height;
 
@@ -50,45 +50,48 @@ public class Window extends JFrame implements ComponentListener{
         setTitle(name);
         setSize(width, height);
 
-        //Define window related operations
+        // Define window related operations
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        //Add input readers
+        // Add input readers
         addKeyListener(reader);
         addMouseListener(mouseReader);
         requestFocus();
-        //Add a renderer
+        // Add a renderer
         add(gameRenderer);
 
         setVisible(true);
 
         Window.window = this;
-        //Define a background color
-        if(Window.background != null) {setBackground(background);}
+        // Define a background color
+        if (Window.background != null) {
+            setBackground(background);
+        }
 
         addComponentListener(this);
     }
 
-    public void changeBackground(Color backColor){
+    public void changeBackground(Color backColor) {
 
         Window.background = backColor;
         getContentPane().setBackground(backColor);
     }
 
-    public void closeWindow(){
+    public void closeWindow() {
 
         setVisible(false);
         dispose();
     }
 
-    public static Vec2 getViewportCenter() { return new Vec2(Window.window.getWidth() / 2, Window.window.getHeight() / 2); }
+    public static Vec2 getViewportCenter() {
+        return new Vec2(Window.window.getWidth() / 2, Window.window.getHeight() / 2);
+    }
 
     @Override
     public void componentResized(ComponentEvent e) {
 
-        if(Camera.getInstance() != null)
-        {
+        if (Camera.getInstance() != null) {
             width = getWidth();
             height = getHeight();
 

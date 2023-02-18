@@ -1,6 +1,6 @@
-package com.com.pong.Engine.Utils;
+package Engine.Utils;
 
 public abstract interface AlarmFunctionality {
-    
+
     public abstract void alarmRun();
 }

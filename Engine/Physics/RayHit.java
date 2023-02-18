@@ -1,8 +1,8 @@
-package com.com.pong.Engine.Physics;
+package Engine.Physics;
 
-import com.com.pong.Engine.Components.RectCollider;
-import com.com.pong.Engine.Entity.Object;
-import com.com.pong.Engine.Utils.Geom.Vec2;
+import Engine.Components.RectCollider;
+import Engine.Entity.Object;
+import Engine.Utils.Geom.Vec2;
 
 public class RayHit {
 
@@ -10,11 +10,15 @@ public class RayHit {
     public RectCollider colliderComponent = null;
     public Vec2 point = null;
     public Vec2 normal = null;
-    
-    private Vec2 original = null;
-    public Vec2 getOrigin() {return original;}
 
-    protected RayHit(){}
+    private Vec2 original = null;
+
+    public Vec2 getOrigin() {
+        return original;
+    }
+
+    protected RayHit() {
+    }
 
     protected RayHit(Object collider, RectCollider component, Vec2 point, Vec2 original) {
 
@@ -31,5 +35,7 @@ public class RayHit {
         return null;
     }
 
-    public boolean isEmpty(){ return (collider == null || colliderComponent == null || point == null); }
+    public boolean isEmpty() {
+        return (collider == null || colliderComponent == null || point == null);
+    }
 }

@@ -1,7 +1,7 @@
-package com.com.pong.Engine.Input;
+package Engine.Input;
 
 import java.awt.event.KeyListener;
-import com.com.pong.Engine.Input.Input.Keys;
+import Engine.Input.Input.Keys;
 import java.awt.event.*;
 
 public class KeyboardReader implements KeyListener {
@@ -163,10 +163,12 @@ public class KeyboardReader implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
         // Set axis as zero
-        if (e.getKeyCode() == Input.keyMap[0] || e.getKeyCode() == Input.keyMap[1] || e.getKeyCode() == Input.keyMap[4] || e.getKeyCode() == Input.keyMap[5])
+        if (e.getKeyCode() == Input.keyMap[0] || e.getKeyCode() == Input.keyMap[1] || e.getKeyCode() == Input.keyMap[4]
+                || e.getKeyCode() == Input.keyMap[5])
             Input.axisX = 0;
 
-        if (e.getKeyCode() == Input.keyMap[2] || e.getKeyCode() == Input.keyMap[3] || e.getKeyCode() == Input.keyMap[6] || e.getKeyCode() == Input.keyMap[7])
+        if (e.getKeyCode() == Input.keyMap[2] || e.getKeyCode() == Input.keyMap[3] || e.getKeyCode() == Input.keyMap[6]
+                || e.getKeyCode() == Input.keyMap[7])
             Input.axisY = 0;
 
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {

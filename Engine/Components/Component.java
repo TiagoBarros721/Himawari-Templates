@@ -1,3 +1,4 @@
-package com.com.pong.Engine.Components;
+package Engine.Components;
 
-public class Component {}
+public class Component {
+}

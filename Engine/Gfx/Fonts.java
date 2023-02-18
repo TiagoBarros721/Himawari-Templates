@@ -1,9 +1,9 @@
-package com.com.pong.Engine.Gfx;
+package Engine.Gfx;
 
 import java.io.File;
 
-import com.com.pong.Engine.Utils.Window;
-import com.com.pong.Engine.Utils.Geom.Vec2;
+import Engine.Utils.Window;
+import Engine.Utils.Geom.Vec2;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -80,15 +80,23 @@ public class Fonts {
 
     }
 
-    public Font getFont(){ return font; }
-    public Font getOfSize(int newSize) {return font.deriveFont(font.getStyle(), newSize); }
-    public Font getOfSetting(int setting) {return font.deriveFont(setting, font.getSize()); }
+    public Font getFont() {
+        return font;
+    }
+
+    public Font getOfSize(int newSize) {
+        return font.deriveFont(font.getStyle(), newSize);
+    }
+
+    public Font getOfSetting(int setting) {
+        return font.deriveFont(setting, font.getSize());
+    }
 
     public void setSize(int size) {
 
         font = font.deriveFont(font.getStyle(), size);
     }
-    
+
     public void setStyle(int style) {
 
         font = font.deriveFont(style, font.getSize());

@@ -1,4 +1,4 @@
-package com.com.pong.Engine.Sound;
+package Engine.Sound;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -11,7 +11,7 @@ import javax.sound.sampled.Clip;
 
 import com.google.common.io.Files;
 
-import com.com.pong.Engine.Utils.Window;
+import Engine.Utils.Window;
 import javazoom.jl.decoder.Bitstream;
 import javazoom.jl.decoder.BitstreamException;
 import javazoom.jl.decoder.Header;
@@ -20,11 +20,11 @@ import javazoom.jl.player.Player;
 
 public class Sound {
 
-    //MP3 variables
+    // MP3 variables
     private Player player;
     private FileInputStream fileInputStream;
 
-    //WAV variables
+    // WAV variables
     private Clip clip;
     private AudioInputStream inputStream;
 
@@ -35,39 +35,39 @@ public class Sound {
 
     private float length = 0f;
 
-    public Sound(String path, boolean looping){
+    public Sound(String path, boolean looping) {
 
         File file = new File(Window.RelativeResourcePath + "Sounds/" + path);
         getExtensionByStringHandling(file.getName());
 
         try {
 
-            if(format==SupportedFileFormats.MP3){
+            if (format == SupportedFileFormats.MP3) {
 
                 fileInputStream = new FileInputStream(file);
                 BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
 
                 player = new Player(bufferedInputStream);
 
-                //Get audio length
-                
+                // Get audio length
+
                 length = getMP3Duration(file);
                 System.out.println(length);
 
-            }else if(format==SupportedFileFormats.WAV){
+            } else if (format == SupportedFileFormats.WAV) {
 
                 clip = AudioSystem.getClip();
                 inputStream = AudioSystem.getAudioInputStream(file);
                 clip.open(inputStream);
-    
+
                 length = clip.getMicrosecondLength() / 1000000;
-    
-                if(looping)
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);    
-            }else{
+
+                if (looping)
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+            } else {
 
             }
-            
+
             this.looping = looping;
 
         } catch (Exception e) {
@@ -76,10 +76,10 @@ public class Sound {
     }
 
     public void getExtensionByStringHandling(String filename) {
-        
+
         String ex = Files.getFileExtension(filename);
 
-        switch(ex){
+        switch (ex) {
 
             case "wav":
                 format = SupportedFileFormats.WAV;
@@ -93,7 +93,7 @@ public class Sound {
         }
     }
 
-    public void play(){
+    public void play() {
 
         playingThread = new Thread(playsound);
         playingThread.start();
@@ -104,19 +104,19 @@ public class Sound {
         @Override
         public void run() {
 
-            if(format==SupportedFileFormats.MP3){
-            
-                //Play mp3 sound
+            if (format == SupportedFileFormats.MP3) {
+
+                // Play mp3 sound
                 try {
                     player.play();
                 } catch (JavaLayerException e) {
                     e.printStackTrace();
                 }
-            }else if(format==SupportedFileFormats.WAV){
+            } else if (format == SupportedFileFormats.WAV) {
 
-                //Play wav sound
+                // Play wav sound
                 clip.start();
-            }else{
+            } else {
 
             }
         }
@@ -124,39 +124,42 @@ public class Sound {
 
     public void stop() {
 
-        if(format == SupportedFileFormats.MP3){
+        if (format == SupportedFileFormats.MP3) {
 
-            //Stop mp3 file from playing
+            // Stop mp3 file from playing
             player.close();
-        }else if (format == SupportedFileFormats.WAV){
+        } else if (format == SupportedFileFormats.WAV) {
 
-            //Stop wav file from playing
+            // Stop wav file from playing
             clip.close();
         }
     }
-    
-    public float getLength(){
+
+    public float getLength() {
 
         return length;
     }
 
-    public float getMP3Duration(File filename){
+    public float getMP3Duration(File filename) {
 
         Header h = null;
         FileInputStream file = null;
         try {
             file = new FileInputStream(filename);
-        } catch (FileNotFoundException ex) {}
+        } catch (FileNotFoundException ex) {
+        }
 
         Bitstream bitstream = new Bitstream(file);
         try {
             h = bitstream.readFrame();
-        } catch (BitstreamException ex) {}
+        } catch (BitstreamException ex) {
+        }
         long tn = 0;
         try {
             tn = file.getChannel().size();
-        } catch (IOException ex) {}
-        
-        return h.total_ms((int) tn)/1000;
+        } catch (IOException ex) {
+        }
+
+        return h.total_ms((int) tn) / 1000;
     }
 }
