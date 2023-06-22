@@ -1,0 +1,92 @@
+[
+  {
+    "id": 0,
+    "name": "Coin",
+    "className": "com.com.com.Assets.Objects.Coin",
+    "components": [
+      "Transform"
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "scale": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "angle": 0.0,
+    "tag": "",
+    "layer": 0,
+    "active": true,
+    "isStatic": false
+  },
+  {
+    "id": 1,
+    "name": "Camera",
+    "className": "com.com.com.Assets.Objects.GameCamera",
+    "components": [
+      "Camera",
+      "Transform"
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "scale": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "angle": 0.0,
+    "tag": "",
+    "layer": 0,
+    "active": true,
+    "isStatic": true
+  },
+  {
+    "id": 2,
+    "name": "Player",
+    "className": "com.com.com.Assets.Objects.Player",
+    "components": [
+      "Transform"
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "scale": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "angle": 0.0,
+    "tag": "",
+    "layer": 0,
+    "active": true,
+    "isStatic": false
+  },
+  {
+    "id": 3,
+    "name": "Wall",
+    "className": "com.com.com.Assets.Objects.Wall",
+    "components": [
+      "RectCollider",
+      "Transform"
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "scale": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "colliderDimensions": {
+      "x": 16.0,
+      "y": 16.0
+    },
+    "angle": 0.0,
+    "tag": "",
+    "layer": 0,
+    "active": true,
+    "isStatic": false
+  }
+]
