@@ -1,4 +1,4 @@
-package com.com.pong.Engine.Sound;
+package Engine.Sound;
 
 public enum SupportedFileFormats {
     MP3,

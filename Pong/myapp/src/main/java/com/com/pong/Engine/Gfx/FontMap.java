@@ -1,4 +1,4 @@
-package com.com.pong.Engine.Gfx;
+package Engine.Gfx;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 import java.awt.image.BufferedImage;
 
-import com.com.pong.Engine.Map.TileSet;
+import Engine.Map.TileSet;
 
 public class FontMap {
 

@@ -1,4 +1,4 @@
-package com.com.pong.Engine.Utils;
+package Engine.Utils;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,17 +12,17 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.com.pong.Engine.Components.Animator;
-import com.com.pong.Engine.Components.Body;
-import com.com.pong.Engine.Components.Camera;
-import com.com.pong.Engine.Components.ImageRenderer;
-import com.com.pong.Engine.Components.RectCollider;
-import com.com.pong.Engine.Components.Transform;
-import com.com.pong.Engine.Entity.Object;
-import com.com.pong.Engine.Gfx.Debugging;
-import com.com.pong.Engine.Gfx.ImageUtil;
-import com.com.pong.Engine.Input.Input;
-import com.com.pong.Engine.Map.RoomHandler;
+import Engine.Components.Animator;
+import Engine.Components.Body;
+import Engine.Components.Camera;
+import Engine.Components.ImageRenderer;
+import Engine.Components.RectCollider;
+import Engine.Components.Transform;
+import Engine.Entity.Object;
+import Engine.Gfx.Debugging;
+import Engine.Gfx.ImageUtil;
+import Engine.Input.Input;
+import Engine.Map.RoomHandler;
 
 public class Renderer extends JPanel implements ActionListener {
 
@@ -58,7 +58,8 @@ public class Renderer extends JPanel implements ActionListener {
 
         for (int i = 0; i <= Object.maxLayer; i++) {
 
-            //Convert the current objects array to a copy for the rendering time to avoid concurent modifications
+            // Convert the current objects array to a copy for the rendering time to avoid
+            // concurent modifications
             Object[] copyArray = Object.objects.toArray(new Object[Object.objects.size()]);
 
             for (int j = 0; j < copyArray.length; j++) {
@@ -66,9 +67,10 @@ public class Renderer extends JPanel implements ActionListener {
 
                 if (o.getLayer() == i) {
 
-                    //Run physics updates
+                    // Run physics updates
                     Body b = (Body) o.getComponent("Body");
-                    if (b!= null) b.PhysicsUpdate(deltaTime);
+                    if (b != null)
+                        b.PhysicsUpdate(deltaTime);
 
                     // Run user graphics code every frame
                     o.getBehaviour().DrawGUI(g2d);
@@ -95,12 +97,14 @@ public class Renderer extends JPanel implements ActionListener {
                                 g2d.setComposite(alcom);
 
                                 BufferedImage fnImg = ImageUtil.rotate(r.getImage(), (double) t.angle);
-                                if(r.isFlippedX) fnImg = ImageUtil.flipImageHorizontal(fnImg);
-                                if(r.isFlippedY) fnImg = ImageUtil.flipImageVertical(fnImg);
+                                if (r.isFlippedX)
+                                    fnImg = ImageUtil.flipImageHorizontal(fnImg);
+                                if (r.isFlippedY)
+                                    fnImg = ImageUtil.flipImageVertical(fnImg);
 
                                 g2d.drawImage(fnImg, (int) t.position.x, (int) t.position.y,
-                                        (int)((r.getImage().getWidth() * (int) t.scale.x)),
-                                        (int)((r.getImage().getHeight() * (int) t.scale.y)),
+                                        (int) ((r.getImage().getWidth() * (int) t.scale.x)),
+                                        (int) ((r.getImage().getHeight() * (int) t.scale.y)),
                                         null);
                             }
 
@@ -111,12 +115,15 @@ public class Renderer extends JPanel implements ActionListener {
 
                             if (t != null) {
 
-                                AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, r.getAlpha());
+                                AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+                                        r.getAlpha());
                                 g2d.setComposite(alcom);
 
                                 BufferedImage fnImg = ImageUtil.rotate(r.getImage(), (double) t.angle);
-                                if(r.isFlippedX) fnImg = ImageUtil.flipImageHorizontal(fnImg);
-                                if(r.isFlippedY) fnImg = ImageUtil.flipImageVertical(fnImg);
+                                if (r.isFlippedX)
+                                    fnImg = ImageUtil.flipImageHorizontal(fnImg);
+                                if (r.isFlippedY)
+                                    fnImg = ImageUtil.flipImageVertical(fnImg);
 
                                 g2d.drawImage(fnImg,
                                         (int) (t.position.x - Camera.position.position.x + Camera.getOffset().x),
@@ -131,22 +138,24 @@ public class Renderer extends JPanel implements ActionListener {
                     AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
                     g2d.setComposite(alcom);
 
-                    if(Debugging.drawColliders){
+                    if (Debugging.drawColliders) {
 
                         Transform t = (Transform) o.getComponent(Transform.class);
                         RectCollider c = (RectCollider) o.getComponent(RectCollider.class);
 
-                        if(c != null && t != null){
-                            
-                            if(Camera.getInstance() != null){
+                        if (c != null && t != null) {
+
+                            if (Camera.getInstance() != null) {
 
                                 g2d.setColor(Color.RED);
-                                g2d.drawRect((int) (int) (t.position.x - Camera.position.position.x + Camera.getOffset().x),
-                                (int) (t.position.y - Camera.position.position.y + Camera.getOffset().y), (int) c.bounds.x, (int) c.bounds.y);
-                            }else{
+                                g2d.drawRect(
+                                        (int) (int) (t.position.x - Camera.position.position.x + Camera.getOffset().x),
+                                        (int) (t.position.y - Camera.position.position.y + Camera.getOffset().y),
+                                        (int) c.bounds.x, (int) c.bounds.y);
+                            } else {
                                 g2d.setColor(Color.RED);
                                 g2d.drawRect((int) (int) (t.position.x),
-                                (int) (t.position.y), (int) c.bounds.x, (int) c.bounds.y);
+                                        (int) (t.position.y), (int) c.bounds.x, (int) c.bounds.y);
                             }
                         }
 
@@ -159,14 +168,14 @@ public class Renderer extends JPanel implements ActionListener {
 
         // Give the programmer an opportunity to draw it's own graphics
         /*
-        for (Iterator<Object> obj = Object.objects.iterator(); obj.hasNext();) {
-            Object object = obj.next();
-
-            // Run user code every frame
-            object.getBehaviour().DrawGUI(g2d);
-            g2d.setColor(Color.BLACK);
-        }
-        */
+         * for (Iterator<Object> obj = Object.objects.iterator(); obj.hasNext();) {
+         * Object object = obj.next();
+         * 
+         * // Run user code every frame
+         * object.getBehaviour().DrawGUI(g2d);
+         * g2d.setColor(Color.BLACK);
+         * }
+         */
     }
 
     private void globalUpdate() {
@@ -198,7 +207,7 @@ public class Renderer extends JPanel implements ActionListener {
 
         for (int j = 0; j < copyArray.length; j++) {
             Object object = copyArray[j];
-            
+
             // Run the necessary component updates
             Animator a = (Animator) object.getComponent("Animator");
             if (a != null) {
@@ -231,7 +240,7 @@ public class Renderer extends JPanel implements ActionListener {
                 globalUpdate();
                 repaint();
             }
-            
+
         }).start();
     }
 }

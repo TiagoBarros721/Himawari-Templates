@@ -1,9 +1,9 @@
-package com.com.pong.Engine.Gfx;
+package Engine.Gfx;
 
 import java.awt.image.BufferedImage;
 
 public class Animation {
-    
+
     BufferedImage[] frames;
     int startX, startY, width, height;
 
@@ -19,6 +19,8 @@ public class Animation {
 
         endFrame = frames.length;
     }
-    
-    public BufferedImage getFrame(int index){ return frames[index]; }
+
+    public BufferedImage getFrame(int index) {
+        return frames[index];
+    }
 }

@@ -1,6 +1,6 @@
-package com.com.pong.Engine.Gfx;
+package Engine.Gfx;
 
-import com.com.pong.Engine.Components.ImageRenderer.scaleAlgorithm;
+import Engine.Components.ImageRenderer.scaleAlgorithm;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -10,28 +10,26 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 
 public class ImageUtil {
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////   IMAGE UTILS
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    public static BufferedImage resizeImage(int targetWidth, int targetHeight, scaleAlgorithm al, BufferedImage sprite) {
 
-        if(al == scaleAlgorithm.FAST){
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////// IMAGE UTILS
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    public static BufferedImage resizeImage(int targetWidth, int targetHeight, scaleAlgorithm al,
+            BufferedImage sprite) {
+
+        if (al == scaleAlgorithm.FAST) {
 
             Image i = sprite.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
             return toBufferedImage(i);
-        }
-        else{
-            
+        } else {
+
             Image i = sprite.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
             return toBufferedImage(i);
         }
     }
 
-    public static BufferedImage toBufferedImage(Image img)
-    {
-        if (img instanceof BufferedImage)
-        {
+    public static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
             return (BufferedImage) img;
         }
 
@@ -47,7 +45,7 @@ public class ImageUtil {
         return bimage;
     }
 
-    public static BufferedImage flipImageHorizontal(BufferedImage sprite){
+    public static BufferedImage flipImageHorizontal(BufferedImage sprite) {
 
         BufferedImage img = new BufferedImage(sprite.getWidth(), sprite.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
@@ -56,7 +54,7 @@ public class ImageUtil {
         return img;
     }
 
-    public static BufferedImage flipImageVertical(BufferedImage sprite){
+    public static BufferedImage flipImageVertical(BufferedImage sprite) {
 
         BufferedImage img = new BufferedImage(sprite.getWidth(), sprite.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
@@ -66,26 +64,25 @@ public class ImageUtil {
     }
 
     public static BufferedImage rotate(BufferedImage bimg, Double angle) {
-        
- 
+
         // Getting Dimensions of image
         int width = bimg.getWidth();
         int height = bimg.getHeight();
- 
+
         // Creating a new buffered image
         BufferedImage newImage = new BufferedImage(
-            bimg.getWidth(), bimg.getHeight(), bimg.getType());
- 
+                bimg.getWidth(), bimg.getHeight(), bimg.getType());
+
         // creating Graphics in buffered image
         Graphics2D g2 = newImage.createGraphics();
- 
+
         // Rotating image by degrees using toradians()
         // method
         // and setting new dimension t it
         g2.rotate(Math.toRadians(angle), width / 2,
-                  height / 2);
+                height / 2);
         g2.drawImage(bimg, null, 0, 0);
- 
+
         // Return rotated buffer image
         return newImage;
     }

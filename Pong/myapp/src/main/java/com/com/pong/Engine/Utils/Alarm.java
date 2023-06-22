@@ -1,15 +1,15 @@
-package com.com.pong.Engine.Utils;
+package Engine.Utils;
 
 import java.util.concurrent.TimeUnit;
 
-public class Alarm{
+public class Alarm {
 
     private static AlarmPack currentAlarm;
     private static boolean running = false;
 
-    public static void runAlarm(AlarmPack alarm){
+    public static void runAlarm(AlarmPack alarm) {
 
-        if(running){
+        if (running) {
 
             System.out.println("[THREAD OCCUPIED] There is already an alarm waiting to be called");
             return;
@@ -18,26 +18,26 @@ public class Alarm{
         running = true;
         currentAlarm = alarm;
 
-        //Thread the alarm
+        // Thread the alarm
         new Thread(new Runnable() {
 
             @Override
             public void run() {
-                
-                //Wait
+
+                // Wait
                 try {
                     TimeUnit.SECONDS.sleep((long) currentAlarm.getDelay());
-                
+
                     currentAlarm.getAlarm().alarmRun();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    
-                }finally{
+
+                } finally {
 
                     running = false;
                 }
             }
-            
+
         }).start();
     }
 }

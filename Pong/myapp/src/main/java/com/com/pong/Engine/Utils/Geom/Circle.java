@@ -1,7 +1,7 @@
-package com.com.pong.Engine.Utils.Geom;
+package Engine.Utils.Geom;
 
-public class Circle extends Shape{
-    
+public class Circle extends Shape {
+
     public float x, y;
     public float radius;
 
@@ -24,9 +24,9 @@ public class Circle extends Shape{
     @Override
     public boolean Intersects(Shape other) {
 
-        if(other instanceof Circle) {
+        if (other instanceof Circle) {
 
-            //Circle
+            // Circle
             Circle circ = (Circle) other;
 
             float sumR = (circ.radius + radius);
@@ -34,9 +34,9 @@ public class Circle extends Shape{
 
             return dist <= sumR;
 
-        }else{
+        } else {
 
-            //Rectangle
+            // Rectangle
         }
 
         return false;

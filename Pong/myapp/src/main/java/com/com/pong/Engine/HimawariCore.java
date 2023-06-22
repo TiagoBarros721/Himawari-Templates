@@ -1,32 +1,32 @@
-package com.com.pong.Engine;
+package Engine;
 
 import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JFrame;
 
-import com.com.pong.Engine.Components.Camera;
-import com.com.pong.Engine.Map.Room;
-import com.com.pong.Engine.Map.RoomHandler;
-import com.com.pong.Engine.Utils.ObjectLoader;
-import com.com.pong.Engine.Entity.Hierarchy;
-import com.com.pong.Engine.Entity.Node;
-import com.com.pong.Engine.Entity.Object;
-import com.com.pong.Engine.Utils.Window;
-import com.com.pong.Engine.Utils.Geom.Vec2;
+import Engine.Components.Camera;
+import Engine.Map.Room;
+import Engine.Map.RoomHandler;
+import Engine.Utils.ObjectLoader;
+import Engine.Entity.Hierarchy;
+import Engine.Entity.Node;
+import Engine.Entity.Object;
+import Engine.Utils.Window;
+import Engine.Utils.Geom.Vec2;
 
 public class HimawariCore {
 
     protected static Window window;
     private static Vec2 savedWindowSize = new Vec2();
 
-    public static enum Windowmode{
+    public static enum Windowmode {
 
         WINDOWED,
         FULLSCREEN
     }
-    
-    public static void CreateWindow(int width, int height, String name){
+
+    public static void CreateWindow(int width, int height, String name) {
 
         window = new Window();
         window.initWindow(width, height, name);
@@ -34,40 +34,40 @@ public class HimawariCore {
         savedWindowSize = new Vec2(window.getWidth(), window.getHeight());
     }
 
-    public static void LoadRoom(Room room){
+    public static void LoadRoom(Room room) {
 
-        if(RoomHandler.startRoom == null){
+        if (RoomHandler.startRoom == null) {
             RoomHandler.startRoom = room;
             RoomHandler.currentRoom = room;
-        }else{
+        } else {
 
-            //Move to room
+            // Move to room
         }
 
         room.loadObjects();
     }
 
-    public static void LoadRoom(Room room, boolean loadObjects){
+    public static void LoadRoom(Room room, boolean loadObjects) {
 
-        if(RoomHandler.startRoom == null){
+        if (RoomHandler.startRoom == null) {
             RoomHandler.startRoom = room;
             RoomHandler.currentRoom = room;
-        }else{
+        } else {
 
-            //Move to room
+            // Move to room
         }
 
-        if(loadObjects)
+        if (loadObjects)
             room.loadObjects();
     }
 
-    public static void CloseWindow(){
+    public static void CloseWindow() {
 
         window.dispose();
         window = null;
     }
 
-    public static void EndProgram(){
+    public static void EndProgram() {
 
         window.closeWindow();
         window = null;
@@ -76,27 +76,27 @@ public class HimawariCore {
         System.exit(0);
     }
 
-    public static void ChangeWindowMode(Windowmode mode){
+    public static void ChangeWindowMode(Windowmode mode) {
 
-        if(mode == Windowmode.WINDOWED){
+        if (mode == Windowmode.WINDOWED) {
 
             window.setSize((int) savedWindowSize.x, (int) savedWindowSize.y);
-        }else{
+        } else {
             savedWindowSize = new Vec2(window.getWidth(), window.getHeight());
 
             window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
     }
 
-    public static Object CreateObject(String name, Vec2 position, float angle, Vec2 scale){
+    public static Object CreateObject(String name, Vec2 position, float angle, Vec2 scale) {
 
         Object newObj = ObjectLoader.LoadObjectOfName(name, position, angle, scale);
         return newObj;
     }
 
-    public static Object CreateObject(Class c, Vec2 position, float angle, Vec2 scale){
+    public static Object CreateObject(Class c, Vec2 position, float angle, Vec2 scale) {
 
-        if(c.getSuperclass() == Object.class){
+        if (c.getSuperclass() == Object.class) {
 
             Object o;
             try {
@@ -110,20 +110,20 @@ public class HimawariCore {
 
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-                
+
                 System.out.println("[ERROR] The input class does not have an accessible constructor");
                 e.printStackTrace();
                 return null;
             }
-        }   
+        }
 
         System.out.println("[ERROR] The input class does not match an object type");
         return null;
     }
-    
-    public static Object CreateObject(String name){
 
-        Object newObj = ObjectLoader.LoadObjectOfName(name, new Vec2(0, 0), 0, new Vec2(0,0));
+    public static Object CreateObject(String name) {
+
+        Object newObj = ObjectLoader.LoadObjectOfName(name, new Vec2(0, 0), 0, new Vec2(0, 0));
         return newObj;
     }
 }

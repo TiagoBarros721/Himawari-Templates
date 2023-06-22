@@ -1,4 +1,4 @@
-package com.com.pong.Engine.Input;
+package Engine.Input;
 
 import java.awt.event.*;
 import java.awt.MouseInfo;
@@ -11,7 +11,8 @@ public class Input {
     public static int mouseX = 0;
     public static int mouseY = 0;
 
-    protected static char[] keyMap = { KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN };
+    protected static char[] keyMap = { KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_LEFT,
+            KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN };
 
     protected static boolean[] mousePressed = new boolean[3];
 
@@ -30,7 +31,7 @@ public class Input {
         return KeyboardReader.keys[key.ordinal()];
     }
 
-    public static enum MouseButtons{
+    public static enum MouseButtons {
 
         LEFT,
         MIDDLE,
